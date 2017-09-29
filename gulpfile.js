@@ -17,24 +17,37 @@ gulp.task('scripts', function() {
           insertGlobals : true,
           debug : !gulp.env.production
         }))
-        .pipe(gulp.dest('./dist/js'))
+        .pipe(gulp.dest('./docs/js'))
+});
+
+gulp.task('js', function() {
+    // Single entry point to browserify
+    gulp.src('js/main.js')
+        .pipe(babel({
+          presets: ['env']
+        }))
+        .pipe(browserify({
+          insertGlobals : true,
+          debug : gulp.env.production
+        }))
+        .pipe(gulp.dest('./docs/js'))
 });
 
 gulp.task('css', function(){
   gulp.src('css/main.css')
-  .pipe(gulp.dest('./dist/css'));
+  .pipe(gulp.dest('./docs/css'));
   // Other watchers
 });
 
 gulp.task('html', function(){
   gulp.src('index.html')
-  .pipe(gulp.dest('./dist/'));
+  .pipe(gulp.dest('./docs/'));
 });
 
 gulp.task('watch', function(){
   gulp.watch('js//**/*.js', ['scripts']);
 });
 
-gulp.task('build', ['scripts', 'css', 'html'], () => {
-  return gulp.src('dist/**/*');
+gulp.task('build', ['js', 'css', 'html'], () => {
+  return gulp.src('docs/**/*');
 });
