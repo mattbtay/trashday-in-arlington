@@ -26,7 +26,7 @@ gulp.task('scripts', function() {
 
 gulp.task('js', function() {
     // Single entry point to browserify
-    gulp.src('js/main.js')
+    gulp.src('js/bundle.js')
         .pipe(babel({
           presets: ['env']
         }))
@@ -49,7 +49,7 @@ gulp.task('html', function(){
 });
 
 gulp.task('watch', function(){
-  gulp.watch('js//**/*.js', ['scripts']);
+  gulp.watch('js/**/*.js', ['scripts']);
 });
 
 gulp.task('build', ['js', 'css', 'html'], () => {
