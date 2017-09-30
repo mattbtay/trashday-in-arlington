@@ -5,3 +5,7 @@
   align-content: center;
   height:75vh;
 }
+
+.hide {
+  display:none;
+}
