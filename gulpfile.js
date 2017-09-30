@@ -1,6 +1,9 @@
 var gulp = require('gulp');
 var browserify = require('gulp-browserify');
+var uglify = require('gulp-uglify');
+var sourcemaps = require('gulp-sourcemaps');
 var gulpLoadPlugins = require('gulp-load-plugins');
+var rename = require('gulp-rename');
 var watch = require('gulp-watch');
 var babel = require('gulp-babel');
 
@@ -15,9 +18,10 @@ gulp.task('scripts', function() {
         }))
         .pipe(browserify({
           insertGlobals : true,
-          debug : !gulp.env.production
+          debug : true
         }))
-        .pipe(gulp.dest('./docs/js'))
+        .pipe(rename('js/bundle.js'))
+        .pipe(gulp.dest('.'))
 });
 
 gulp.task('js', function() {
