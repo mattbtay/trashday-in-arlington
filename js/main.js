@@ -72,7 +72,7 @@ function getAddr(){
                 areaResult = 'Looks like you might not live in arlington?';
             }
 
-            document.getElementById('answer').outerHTML=areaResult;
+            document.getElementById('answer').innerHTML=areaResult;
 
           }
 

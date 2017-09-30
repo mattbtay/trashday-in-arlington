@@ -85,7 +85,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                     areaResult = 'Looks like you might not live in arlington?';
                   }
 
-                  document.getElementById('answer').outerHTML = areaResult;
+                  document.getElementById('answer').innerHTML = areaResult;
                 };
 
                 // Success!
@@ -110,6 +110,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             request.send();
 
+            setTimeout(function () {
+              document.getElementById('refresh').classList.remove('hide');
+            }, 1500);
             document.getElementById('addrForm').classList.add('hide');
           } else {
             // We reached our target server, but it returned an error
@@ -130,7 +133,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
       document.getElementById('Submit').addEventListener('click', getAddr);
       document.getElementById('refresh').addEventListener('click', refreshPage);
-    }).call(this, require("7YKIPe"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/fake_b1a5c41b.js", "/");
+    }).call(this, require("7YKIPe"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/fake_bcaeb8b6.js", "/");
   }, { "7YKIPe": 4, "buffer": 3, "point-in-polygon": 6 }], 2: [function (require, module, exports) {
     (function (process, global, Buffer, __argument0, __argument1, __argument2, __argument3, __filename, __dirname) {
       var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -1474,7 +1477,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       };
     }).call(this, require("7YKIPe"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/../node_modules/point-in-polygon/index.js", "/../node_modules/point-in-polygon");
   }, { "7YKIPe": 4, "buffer": 3 }] }, {}, [1]);
-}).call(this,require("7YKIPe"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_659e845c.js","/")
+}).call(this,require("7YKIPe"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_9c021fb6.js","/")
 },{"7YKIPe":5,"base64-js":2,"buffer":4,"ieee754":6,"point-in-polygon":7}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 'use strict'

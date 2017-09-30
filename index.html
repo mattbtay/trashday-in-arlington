@@ -9,6 +9,8 @@
         <title>Is today trash day?</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
@@ -16,14 +18,14 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div class="wrap">
-          <h1>Is today Trash Day?</h1>
+          <h1 class="title">Is today trash day?</h1>
           <div id="addrForm">
-            <input id="Address" type="text" placeholder="address" value="1730 Pleasant Pl" />
-            <input id="City" type="text" placeholder="city" value="Arlington" />
+            <input id="Address" type="text" placeholder="101 W Abram St" value="" />
+            <input id="City" type="hidden" placeholder="city" value="Arlington" />
             <input id="State" type="hidden" placeholder="state" value="tx"/>
-            <button id="Submit">is it?</button>
+            <button class="form-submit" id="Submit">is it?</button>
           </div>
-          <h1 id="answer"></h1>
+          <h1 id="answer" class="answer-text"></h1>
           <button id="refresh" class="btn-refresh hide">try again</button>
         </div>
 
