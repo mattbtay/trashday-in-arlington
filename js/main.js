@@ -96,7 +96,7 @@ function getAddr(){
 
       request.send();
 
-
+      document.getElementById('addrForm').classList.add('hide');
 
     } else {
       // We reached our target server, but it returned an error
@@ -112,4 +112,9 @@ function getAddr(){
 
 }
 
+function refreshPage(){
+  window.location.reload();
+}
+
 document.getElementById('Submit').addEventListener('click', getAddr);
+document.getElementById('refresh').addEventListener('click', refreshPage);
