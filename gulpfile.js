@@ -34,6 +34,7 @@ gulp.task('js', function() {
           insertGlobals : true,
           debug : gulp.env.production
         }))
+        .pipe(rename('js/bundle.js'))
         .pipe(gulp.dest('./docs/js'))
 });
 
