@@ -3,9 +3,14 @@
   justify-content:center;
   align-items: center;
   align-content: center;
+  flex-direction:column;
   height:75vh;
 }
 
 .hide {
   display:none;
+}
+
+.btn-refresh {
+  margin-top:5px;
 }

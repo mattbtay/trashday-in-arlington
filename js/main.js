@@ -96,6 +96,9 @@ function getAddr(){
 
       request.send();
 
+      setTimeout(function(){
+        document.getElementById('refresh').classList.remove('hide');
+      },1500)
       document.getElementById('addrForm').classList.add('hide');
 
     } else {
