@@ -9,7 +9,7 @@ body {
   align-items: center;
   align-content: center;
   flex-direction:column;
-  height:75vh;
+  height:80vh;
 }
 
 .answer-text {
@@ -19,7 +19,7 @@ body {
 
 .title {
   font-weight:300;
-  margin:0 0 15px 0;
+  margin:0 0 50px 0;
 }
 
 .hide {
@@ -45,6 +45,17 @@ input[type="text"] {
   color:gray;
 }
 
+input[type="text"]:focus {
+  outline:0;
+}
+
+@media screen and (max-width:767px) {
+  input[type="text"] {
+    width:100%;
+    margin:0;
+  }
+}
+
 input::placeholder {
   font-weight:300;
   opacity:.7;
@@ -56,9 +67,19 @@ input::placeholder {
   color:#fff;
   border:0;
   font-size:22px;
-  padding:8px 15px;
+  padding:8px 25px 12px;
   margin-left:10px;
   font-weight:300;
+}
+
+@media screen and (max-width:767px) {
+
+  .form-submit, .btn-refresh {
+    width:100%;
+    margin-top:15px;
+    margin-left:0;
+  }
+
 }
 
 .btn-refresh {
@@ -71,4 +92,8 @@ padding: 8px 25px 12px;
 
 .form-submit:hover {
   cursor:pointer;
+}
+
+.meta {
+  
 }
