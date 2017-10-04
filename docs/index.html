@@ -6,32 +6,67 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Is today trash day?</title>
-        <meta name="description" content="">
+        <title>Is today your trashday?</title>
+        <meta name="description" content="Is today trashday in Arlington TX? Find out now?">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <div class="wrap">
-          <h1 class="title">Is today trash day?</h1>
-          <div id="addrForm">
-            <input id="Address" type="text" placeholder="101 W Abram St" value="" />
-            <input id="City" type="hidden" placeholder="city" value="Arlington" />
-            <input id="State" type="hidden" placeholder="state" value="tx"/>
-            <button class="form-submit" id="Submit">well, is it?</button>
-          </div>
-          <h1 id="answer" class="answer-text"></h1>
-          <button id="refresh" class="btn-refresh hide">Another?</button>
+
+        <div class="">
+        <div class="wrap p-2 d-flex flex-column justify-content-center">
+
+              <h1 class="title">Is today trash day?</h1>
+
+              <div id="addrForm" class="address-form">
+                <input id="Address" type="text" placeholder="101 W Abram St" value="" />
+                <input id="City" type="hidden" placeholder="city" value="Arlington" />
+                <input id="State" type="hidden" placeholder="state" value="tx"/>
+                <button class="form-submit" id="Submit">Is it?</button>
+              </div>
+
+              <div id="answer" class="answer-text"></div>
+
+
+
+              <a href="#" class="btn-refresh hide" id="refresh">Try again?</a>
+
+
 
         </div>
-        <div class="meta">
-          <p>with <3 from <a href="http://twitter.com/mattbtay" target="_blank">mattbtay</a> Data provided by <a href="http://www.arlington-tx.gov/data/" target="_blank">City of Arlington Open Data</a></p>
+
+      </div>
+
+        <div class="footer d-flex align-items-center">
+
+          <div class="container">
+
+            <div class="col-md-12">
+
+              <p class="footer__info">with <3 from <a href="http://twitter.com/mattbtay" target="_blank">mattbtay</a> Data provided by <a href="http://data-arlingtontx.opendata.arcgis.com/" target="_blank">City of Arlington Open Data</a></p>
+
+            </div>
+
+          </div>
+
         </div>
+
         <script src="js/bundle.js"></script>
+
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-107494415-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-107494415-1');
+        </script>
+
     </body>
 </html>
