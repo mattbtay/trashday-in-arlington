@@ -14,6 +14,14 @@ var state = '';
 
 function getAddr(){
 
+  if (document.getElementById('Address').value.length > 0) {
+
+    if ( !document.getElementById('error-text').classList.contains('hide') ) {
+
+      document.getElementById('error-text').classList.add('hide');
+
+    }
+
   var addr = document.getElementById('Address').value.split(' ').join('+'),
       city = document.getElementById('City').value.split(' ').join('+'),
       state = document.getElementById('State').value.split(' ').join('+');
@@ -117,6 +125,10 @@ function getAddr(){
   };
 
   request.send();
+
+} else {
+  document.getElementById('error-text').classList.remove('hide');
+}
 
 }
 

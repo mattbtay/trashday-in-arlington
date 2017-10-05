@@ -35,98 +35,108 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             function getAddr() {
 
-                var addr = document.getElementById('Address').value.split(' ').join('+'),
-                    city = document.getElementById('City').value.split(' ').join('+'),
-                    state = document.getElementById('State').value.split(' ').join('+');
+                if (document.getElementById('Address').value.length > 0) {
 
-                var geoquery = baseurl + 'address=' + addr + ',+' + city + ',+' + state + '&key=' + apikey;
-                console.log(geoquery);
+                    if (!document.getElementById('error-text').classList.contains('hide')) {
 
-                var request = new XMLHttpRequest();
-
-                request.open('GET', geoquery, true);
-
-                request.onload = function () {
-
-                    if (this.status >= 200 && this.status < 400) {
-                        // Success!
-                        var data = JSON.parse(this.response);
-
-                        var lat = data.results[0].geometry.location.lat; //32'ish number
-                        var lng = data.results[0].geometry.location.lng; // -97'ish number
-
-                        request.open('GET', query, true);
-
-                        request.onload = function () {
-
-                            if (this.status >= 200 && this.status < 400) {
-                                // Success!
-                                var _data = JSON.parse(this.response);
-
-                                var north = _data.features[0].geometry.rings[0];
-                                var mid = _data.features[1].geometry.rings[0];
-                                var south = _data.features[2].geometry.rings[0];
-
-                                request.checkAreas = function () {
-
-                                    if (inside([lng, lat], north)) {
-                                        state = 0;
-                                    } else if (inside([lng, lat], mid)) {
-                                        state = 1;
-                                    } else if (inside([lng, lat], south)) {
-                                        state = 2;
-                                    } else {
-                                        state = 4;
-                                    }
-
-                                    var areaResult;
-                                    var trashStatus;
-                                    var statusColor;
-
-                                    //alert(state);
-                                    if (state !== 4) {
-                                        areaResult = _data.features[state].attributes.RouteDay;
-                                        var currentDay = moment().format('dddd');
-
-                                        if (areaResult.includes(currentDay)) {
-                                            trashStatus = 'yes';
-                                        } else {
-                                            trashStatus = 'no';
-                                        }
-                                    } else {
-                                        trashStatus = 'Looks like you might not live in arlington?';
-                                    }
-
-                                    document.getElementById('answer').innerHTML = '\n                                                        <h2 class="trash-status status-' + trashStatus + '">' + trashStatus + '</h2>\n                                                        <p class="trash-info">Your trash days are ' + areaResult + '\n                                                        ';
-                                };
-
-                                request.checkAreas();
-                            } else {
-                                // We reached our target server, but it returned an error
-                                console.log('nothing here');
-                            }
-                        };
-
-                        request.onerror = function () {
-                            // There was a connection error of some sort
-                            console.log('err');
-                        };
-
-                        request.send();
-
-                        document.getElementById('refresh').classList.remove('hide');
-                        document.getElementById('addrForm').classList.add('hide');
-                    } else {
-                        // We reached our target server, but it returned an error
-
+                        document.getElementById('error-text').classList.add('hide');
                     }
-                };
 
-                request.onerror = function () {
-                    // There was a connection error of some sort
-                };
+                    var addr = document.getElementById('Address').value.split(' ').join('+'),
+                        city = document.getElementById('City').value.split(' ').join('+'),
+                        state = document.getElementById('State').value.split(' ').join('+');
 
-                request.send();
+                    var geoquery = baseurl + 'address=' + addr + ',+' + city + ',+' + state + '&key=' + apikey;
+                    console.log(geoquery);
+
+                    var request = new XMLHttpRequest();
+
+                    request.open('GET', geoquery, true);
+
+                    request.onload = function () {
+
+                        if (this.status >= 200 && this.status < 400) {
+                            // Success!
+                            var data = JSON.parse(this.response);
+
+                            var lat = data.results[0].geometry.location.lat; //32'ish number
+                            var lng = data.results[0].geometry.location.lng; // -97'ish number
+
+                            request.open('GET', query, true);
+
+                            request.onload = function () {
+
+                                if (this.status >= 200 && this.status < 400) {
+                                    // Success!
+                                    var _data = JSON.parse(this.response);
+
+                                    var north = _data.features[0].geometry.rings[0];
+                                    var mid = _data.features[1].geometry.rings[0];
+                                    var south = _data.features[2].geometry.rings[0];
+
+                                    request.checkAreas = function () {
+
+                                        if (inside([lng, lat], north)) {
+                                            state = 0;
+                                        } else if (inside([lng, lat], mid)) {
+                                            state = 1;
+                                        } else if (inside([lng, lat], south)) {
+                                            state = 2;
+                                        } else {
+                                            state = 4;
+                                        }
+
+                                        var areaResult;
+                                        var trashStatus;
+                                        var statusColor;
+
+                                        //alert(state);
+                                        if (state !== 4) {
+                                            areaResult = _data.features[state].attributes.RouteDay;
+                                            var currentDay = moment().format('dddd');
+
+                                            if (areaResult.includes(currentDay)) {
+                                                trashStatus = 'yes';
+                                            } else {
+                                                trashStatus = 'no';
+                                            }
+                                        } else {
+                                            trashStatus = 'Looks like you might not live in arlington?';
+                                        }
+
+                                        document.getElementById('answer').innerHTML = '\n                                                        <h2 class="trash-status status-' + trashStatus + '">' + trashStatus + '</h2>\n                                                        <p class="trash-info">Your trash days are ' + areaResult + '\n                                                        ';
+                                    };
+
+                                    request.checkAreas();
+                                } else {
+                                    // We reached our target server, but it returned an error
+                                    console.log('nothing here');
+                                }
+                            };
+
+                            request.onerror = function () {
+                                // There was a connection error of some sort
+                                console.log('err');
+                            };
+
+                            request.send();
+
+                            document.getElementById('refresh').classList.remove('hide');
+                            document.getElementById('addrForm').classList.add('hide');
+                        } else {
+                            // We reached our target server, but it returned an error
+
+                        }
+                    };
+
+                    request.onerror = function () {
+                        // There was a connection error of some sort
+                    };
+
+                    request.send();
+                } else {
+                    document.getElementById('error-text').classList.remove('hide');
+                }
             }
 
             function refreshPage() {
@@ -135,7 +145,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
             document.getElementById('Submit').addEventListener('click', getAddr);
             document.getElementById('refresh').addEventListener('click', refreshPage);
-        }).call(this, require("pBGvAp"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/fake_67c10316.js", "/");
+        }).call(this, require("pBGvAp"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/fake_f3d3d067.js", "/");
     }, { "buffer": 3, "moment": 5, "pBGvAp": 7, "point-in-polygon": 6 }], 2: [function (require, module, exports) {
         (function (process, global, Buffer, __argument0, __argument1, __argument2, __argument3, __filename, __dirname) {
             var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -5831,7 +5841,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             };
         }).call(this, require("pBGvAp"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/../node_modules/process/browser.js", "/../node_modules/process");
     }, { "buffer": 3, "pBGvAp": 7 }] }, {}, [1]);
-}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_4c713af4.js","/")
+}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_6c669530.js","/")
 },{"base64-js":2,"buffer":3,"ieee754":4,"moment":5,"pBGvAp":7,"point-in-polygon":6}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
