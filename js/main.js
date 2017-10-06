@@ -52,70 +52,78 @@ var getAddr = () => {
         lng = resp.results[0].geometry.location.lng; // -97'ish number
         return lat, lng;
 
+
+
+
       },
       error: function() {
         console.log('error bro');
-      }
-    });
+      },
+      complete: function(){
 
-    $.ajax({
-      type: 'GET',
-      url: 'https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/3/query?where=1%3D1&outFields=OBJECTID,RouteDay,SHAPE&outSR=4326&f=json',
-      success: function(resp) {
+        $.ajax({
+          type: 'GET',
+          url: 'https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/3/query?where=1%3D1&outFields=OBJECTID,RouteDay,SHAPE&outSR=4326&f=json',
+          success: function(resp) {
 
-        var data = JSON.parse(resp);
+            var data = JSON.parse(resp);
 
 
-        let north = data.features[0].geometry.rings[0];
-        let mid = data.features[1].geometry.rings[0];
-        let south = data.features[2].geometry.rings[0];
+            let north = data.features[0].geometry.rings[0];
+            let mid = data.features[1].geometry.rings[0];
+            let south = data.features[2].geometry.rings[0];
 
-        function checkAreas() {
+            function checkAreas() {
 
-          if( inside([ lng, lat ], north) ) {
-            state = 0;
-          } else if (inside([ lng, lat ], mid)) {
-            state = 1;
-          } else if ( inside([ lng, lat ], south )) {
-            state = 2;
-          } else {
-            state = 4;
-          }
-
-          var areaResult;
-          var trashStatus;
-          var statusColor;
-
-          //alert(state);
-          if ( state !== 4 ) {
-              areaResult = data.features[state].attributes.RouteDay;
-              var currentDay = moment().format('dddd');
-
-              if ( areaResult.includes( currentDay ) ) {
-                trashStatus = 'yes' ;
+              if( inside([ lng, lat ], north) ) {
+                state = 0;
+              } else if (inside([ lng, lat ], mid)) {
+                state = 1;
+              } else if ( inside([ lng, lat ], south )) {
+                state = 2;
               } else {
-                trashStatus = 'no';
+                state = 4;
               }
 
+              var areaResult;
+              var trashStatus;
+              var statusColor;
 
-          } else {
-              trashStatus = 'Looks like you might not live in arlington?';
+              //alert(state);
+              if ( state !== 4 ) {
+                  areaResult = data.features[state].attributes.RouteDay;
+                  var currentDay = moment().format('dddd');
+
+                  if ( areaResult.includes( currentDay ) ) {
+                    trashStatus = 'yes' ;
+                  } else {
+                    trashStatus = 'no';
+                  }
+
+
+              } else {
+                  trashStatus = 'Looks like you might not live in arlington?';
+              }
+
+              $('#answer').html(`
+                <h2 class="trash-status status-${trashStatus}">${trashStatus}</h2>
+                <p class="trash-info">Your trash days are ${areaResult}
+                `);
+
+            }
+
+            checkAreas();
+
+          },
+          error: function() {
+            console.log('error');
           }
+        });
 
-          $('#answer').html(`
-            <h2 class="trash-status status-${trashStatus}">${trashStatus}</h2>
-            <p class="trash-info">Your trash days are ${areaResult}
-            `);
-
-        }
-
-        checkAreas();
-
-      },
-      error: function() {
-        console.log('error');
       }
     });
+
+
 
     $('#refresh').removeClass('hide');
     $('#addrForm').addClass('hide');
@@ -123,6 +131,8 @@ var getAddr = () => {
   }
 
 }
+
+
 
 
 

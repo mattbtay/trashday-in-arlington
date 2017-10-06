@@ -75,57 +75,59 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         },
                         error: function error() {
                             console.log('error bro');
-                        }
-                    });
-
-                    $.ajax({
-                        type: 'GET',
-                        url: 'https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/3/query?where=1%3D1&outFields=OBJECTID,RouteDay,SHAPE&outSR=4326&f=json',
-                        success: function success(resp) {
-
-                            var data = JSON.parse(resp);
-
-                            var north = data.features[0].geometry.rings[0];
-                            var mid = data.features[1].geometry.rings[0];
-                            var south = data.features[2].geometry.rings[0];
-
-                            function checkAreas() {
-
-                                if (inside([lng, lat], north)) {
-                                    state = 0;
-                                } else if (inside([lng, lat], mid)) {
-                                    state = 1;
-                                } else if (inside([lng, lat], south)) {
-                                    state = 2;
-                                } else {
-                                    state = 4;
-                                }
-
-                                var areaResult;
-                                var trashStatus;
-                                var statusColor;
-
-                                //alert(state);
-                                if (state !== 4) {
-                                    areaResult = data.features[state].attributes.RouteDay;
-                                    var currentDay = moment().format('dddd');
-
-                                    if (areaResult.includes(currentDay)) {
-                                        trashStatus = 'yes';
-                                    } else {
-                                        trashStatus = 'no';
-                                    }
-                                } else {
-                                    trashStatus = 'Looks like you might not live in arlington?';
-                                }
-
-                                $('#answer').html('\n            <h2 class="trash-status status-' + trashStatus + '">' + trashStatus + '</h2>\n            <p class="trash-info">Your trash days are ' + areaResult + '\n            ');
-                            }
-
-                            checkAreas();
                         },
-                        error: function error() {
-                            console.log('error');
+                        complete: function complete() {
+
+                            $.ajax({
+                                type: 'GET',
+                                url: 'https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/3/query?where=1%3D1&outFields=OBJECTID,RouteDay,SHAPE&outSR=4326&f=json',
+                                success: function success(resp) {
+
+                                    var data = JSON.parse(resp);
+
+                                    var north = data.features[0].geometry.rings[0];
+                                    var mid = data.features[1].geometry.rings[0];
+                                    var south = data.features[2].geometry.rings[0];
+
+                                    function checkAreas() {
+
+                                        if (inside([lng, lat], north)) {
+                                            state = 0;
+                                        } else if (inside([lng, lat], mid)) {
+                                            state = 1;
+                                        } else if (inside([lng, lat], south)) {
+                                            state = 2;
+                                        } else {
+                                            state = 4;
+                                        }
+
+                                        var areaResult;
+                                        var trashStatus;
+                                        var statusColor;
+
+                                        //alert(state);
+                                        if (state !== 4) {
+                                            areaResult = data.features[state].attributes.RouteDay;
+                                            var currentDay = moment().format('dddd');
+
+                                            if (areaResult.includes(currentDay)) {
+                                                trashStatus = 'yes';
+                                            } else {
+                                                trashStatus = 'no';
+                                            }
+                                        } else {
+                                            trashStatus = 'Looks like you might not live in arlington?';
+                                        }
+
+                                        $('#answer').html('\n                <h2 class="trash-status status-' + trashStatus + '">' + trashStatus + '</h2>\n                <p class="trash-info">Your trash days are ' + areaResult + '\n                ');
+                                    }
+
+                                    checkAreas();
+                                },
+                                error: function error() {
+                                    console.log('error');
+                                }
+                            });
                         }
                     });
 
@@ -143,7 +145,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 $('#refresh').click(refreshPage);
             });
-        }).call(this, require("pBGvAp"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/fake_6e2da5cf.js", "/");
+        }).call(this, require("pBGvAp"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/fake_b849908.js", "/");
     }, { "buffer": 3, "moment": 5, "pBGvAp": 7, "point-in-polygon": 6 }], 2: [function (require, module, exports) {
         (function (process, global, Buffer, __argument0, __argument1, __argument2, __argument3, __filename, __dirname) {
             var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -5839,7 +5841,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             };
         }).call(this, require("pBGvAp"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/../node_modules/process/browser.js", "/../node_modules/process");
     }, { "buffer": 3, "pBGvAp": 7 }] }, {}, [1]);
-}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_7bbca53b.js","/")
+}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_60f8be96.js","/")
 },{"base64-js":2,"buffer":3,"ieee754":4,"moment":5,"pBGvAp":7,"point-in-polygon":6}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
