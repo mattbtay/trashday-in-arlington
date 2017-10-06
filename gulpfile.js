@@ -34,7 +34,7 @@ gulp.task('js', function() {
         }))
         .pipe(browserify({
           insertGlobals : true,
-          debug : gulp.env.production
+          debug : false
         }))
         .pipe(gulp.dest('./docs/js'))
 });
