@@ -52,9 +52,6 @@ var getAddr = () => {
         lng = resp.results[0].geometry.location.lng; // -97'ish number
         return lat, lng;
 
-
-
-
       },
       error: function() {
         console.log('error bro');
@@ -67,7 +64,6 @@ var getAddr = () => {
           success: function(resp) {
 
             var data = JSON.parse(resp);
-
 
             let north = data.features[0].geometry.rings[0];
             let mid = data.features[1].geometry.rings[0];
@@ -94,7 +90,7 @@ var getAddr = () => {
                   areaResult = data.features[state].attributes.RouteDay;
                   var currentDay = moment().format('dddd');
 
-                  if ( areaResult.includes( currentDay ) ) {
+                  if ( areaResult.indexOf( currentDay ) >= 0 ) {
                     trashStatus = 'yes' ;
                   } else {
                     trashStatus = 'no';

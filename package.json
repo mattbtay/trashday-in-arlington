@@ -1,4 +1,6 @@
 {
+  "name": "trashday",
+  "version": "1",
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -7,6 +9,7 @@
     "gulp-babel": "^7.0.0",
     "gulp-browserify": "^0.5.1",
     "gulp-load-plugins": "^1.5.0",
+    "gulp-postcss": "^7.0.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",

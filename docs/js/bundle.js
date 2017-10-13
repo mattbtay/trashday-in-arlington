@@ -110,7 +110,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                                             areaResult = data.features[state].attributes.RouteDay;
                                             var currentDay = moment().format('dddd');
 
-                                            if (areaResult.includes(currentDay)) {
+                                            if (areaResult.indexOf(currentDay) >= 0) {
                                                 trashStatus = 'yes';
                                             } else {
                                                 trashStatus = 'no';
@@ -145,7 +145,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
                 $('#refresh').click(refreshPage);
             });
-        }).call(this, require("pBGvAp"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/fake_b849908.js", "/");
+        }).call(this, require("pBGvAp"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/fake_d1ba2060.js", "/");
     }, { "buffer": 3, "moment": 5, "pBGvAp": 7, "point-in-polygon": 6 }], 2: [function (require, module, exports) {
         (function (process, global, Buffer, __argument0, __argument1, __argument2, __argument3, __filename, __dirname) {
             var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
@@ -5841,7 +5841,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
             };
         }).call(this, require("pBGvAp"), typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {}, require("buffer").Buffer, arguments[3], arguments[4], arguments[5], arguments[6], "/../node_modules/process/browser.js", "/../node_modules/process");
     }, { "buffer": 3, "pBGvAp": 7 }] }, {}, [1]);
-}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_60f8be96.js","/")
+}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_21347973.js","/")
 },{"base64-js":2,"buffer":3,"ieee754":4,"moment":5,"pBGvAp":7,"point-in-polygon":6}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
