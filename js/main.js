@@ -16,6 +16,8 @@ var refreshPage = () => {
 
 var getAddr = () => {
 
+  $('.loading-holder').removeClass('loading-hidden');
+
   //set some vars
   let address =   $('#Address'),
       city    =   $('#City'),
@@ -48,9 +50,13 @@ var getAddr = () => {
       url: geoquery,
       success: function(resp) {
 
+        
+
         lat = resp.results[0].geometry.location.lat; //32'ish number
         lng = resp.results[0].geometry.location.lng; // -97'ish number
         return lat, lng;
+
+        
 
       },
       error: function() {
@@ -62,6 +68,8 @@ var getAddr = () => {
           type: 'GET',
           url: 'https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/3/query?where=1%3D1&outFields=OBJECTID,RouteDay,SHAPE&outSR=4326&f=json',
           success: function(resp) {
+
+            $('.loading-holder').addClass('loading-hidden');
 
             var data = JSON.parse(resp);
 
