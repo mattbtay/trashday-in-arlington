@@ -1,5 +1,6 @@
 const inside = require('point-in-polygon');
 const moment = require('moment');
+require('scss/main.scss');
 
 const query = 'https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/3/query?where=1%3D1&outFields=OBJECTID,RouteDay,SHAPE&outSR=4326&f=json'
 
@@ -142,7 +143,7 @@ var getAddr = () => {
 
 // dom ready
 $(document).ready(function(){
-
+  $(document.body).show();
   // events go here
 
   $('#Submit').click(getAddr);
