@@ -2,6 +2,7 @@ const inside = require('point-in-polygon');
 const moment = require('moment');
 require('scss/main.scss');
 
+const test = "";
 const query = 'https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/3/query?where=1%3D1&outFields=OBJECTID,RouteDay,SHAPE&outSR=4326&f=json'
 
 const baseurl = 'https://maps.googleapis.com/maps/api/geocode/json?';
@@ -51,13 +52,13 @@ var getAddr = () => {
       url: geoquery,
       success: function(resp) {
 
-        
+
 
         lat = resp.results[0].geometry.location.lat; //32'ish number
         lng = resp.results[0].geometry.location.lng; // -97'ish number
         return lat, lng;
 
-        
+
 
       },
       error: function() {
