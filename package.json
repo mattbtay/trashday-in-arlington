@@ -1,21 +1,22 @@
 {
   "name": "trashday",
-  "version": "1",
+  "version": "1.0.1",
   "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.0",
-    "gulp-browserify": "^0.5.1",
-    "gulp-load-plugins": "^1.5.0",
-    "gulp-postcss": "^7.0.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
-    "gulp-sourcemaps": "^2.6.1",
-    "gulp-uglify": "^3.0.0",
-    "gulp-watch": "^4.3.11",
-    "moment": "^2.18.1",
-    "point-in-polygon": "^1.0.1"
+    "css-loader": "^0.28.7",
+    "html-webpack-plugin": "^2.30.1",
+    "moment": "^2.19.1",
+    "node-sass": "^4.5.3",
+    "point-in-polygon": "^1.0.1",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "uglifyjs-webpack-plugin": "^1.0.0-beta.3",
+    "webpack": "^3.7.1"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/webpack",
+    "watch": "./node_modules/.bin/webpack --watch"
   }
 }
