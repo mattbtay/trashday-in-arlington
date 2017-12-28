@@ -46,8 +46,14 @@ var getAddr = () => {
       url: geoquery,
       success: function(resp) {
 
-        lat = resp.results[0].geometry.location.lat; //32'ish number
-        lng = resp.results[0].geometry.location.lng; // -97'ish number
+        if (resp.results.length) {
+          lat = resp.results[0].geometry.location.lat; //32'ish number
+          lng = resp.results[0].geometry.location.lng; // -97'ish number
+        } else {
+          lat = 0;
+          lng = 0; // null island
+        }
+
         return lat, lng;
 
 
