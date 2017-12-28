@@ -1,14 +1,9 @@
-const inside = require('point-in-polygon');
 const moment = require('moment');
 require('scss/main.scss');
-
-const query = 'https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/3/query?where=1%3D1&outFields=OBJECTID,RouteDay,SHAPE&outSR=4326&f=json'
 
 const baseurl = 'https://maps.googleapis.com/maps/api/geocode/json?';
 const geocodeurl = 'https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=';
 const apikey = 'AIzaSyAuEdJ504Geu7RLxBhkjWjlKQ0fQFD9Lrs';
-
-var state = '';
 
 // refresh page
 var refreshPage = () => {
@@ -51,74 +46,48 @@ var getAddr = () => {
       url: geoquery,
       success: function(resp) {
 
-        
-
         lat = resp.results[0].geometry.location.lat; //32'ish number
         lng = resp.results[0].geometry.location.lng; // -97'ish number
         return lat, lng;
 
-        
 
       },
       error: function() {
         console.log('error bro');
       },
       complete: function(){
+        // ask the service itself which trash boundary contains the address that was just searched
+        const spatialQuery = 'https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/3/query?where=1%3D1&outFields=OBJECTID,RouteDay&returnGeometry=false&outSR=4326&geometryType=esriGeometryPoint&inSR=4326&geometry=' + lng + ',' + lat + '&f=json';
 
         $.ajax({
           type: 'GET',
-          url: 'https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/3/query?where=1%3D1&outFields=OBJECTID,RouteDay,SHAPE&outSR=4326&f=json',
+          url: spatialQuery,
           success: function(resp) {
 
             $('.loading-holder').addClass('loading-hidden');
 
             var data = JSON.parse(resp);
 
-            let north = data.features[0].geometry.rings[0];
-            let mid = data.features[1].geometry.rings[0];
-            let south = data.features[2].geometry.rings[0];
+            var areaResult;
+            var trashStatus;
 
-            function checkAreas() {
+            if (data.features.length) {
+              areaResult = data.features[0].attributes.RouteDay;
+              var currentDay = moment().format('dddd');
 
-              if( inside([ lng, lat ], north) ) {
-                state = 0;
-              } else if (inside([ lng, lat ], mid)) {
-                state = 1;
-              } else if ( inside([ lng, lat ], south )) {
-                state = 2;
+              if ( areaResult.indexOf( currentDay ) >= 0 ) {
+                trashStatus = 'yes' ;
               } else {
-                state = 4;
+                trashStatus = 'no';
               }
-
-              var areaResult;
-              var trashStatus;
-              var statusColor;
-
-              //alert(state);
-              if ( state !== 4 ) {
-                  areaResult = data.features[state].attributes.RouteDay;
-                  var currentDay = moment().format('dddd');
-
-                  if ( areaResult.indexOf( currentDay ) >= 0 ) {
-                    trashStatus = 'yes' ;
-                  } else {
-                    trashStatus = 'no';
-                  }
-
-
-              } else {
-                  trashStatus = 'Looks like you might not live in arlington?';
-              }
-
-              $('#answer').html(`
-                <h2 class="trash-status status-${trashStatus}">${trashStatus}</h2>
-                <p class="trash-info">Your trash days are ${areaResult}
-                `);
-
+            } else {
+              trashStatus = 'Looks like you might not live in arlington?';
             }
 
-            checkAreas();
-
+            $('#answer').html(`
+              <h2 class="trash-status status-${trashStatus}">${trashStatus}</h2>
+              <p class="trash-info">Your trash days are ${areaResult}
+              `);
           },
           error: function() {
             console.log('error');
