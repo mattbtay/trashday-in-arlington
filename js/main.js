@@ -2,11 +2,11 @@ const inside = require('point-in-polygon');
 const moment = require('moment');
 require('scss/main.scss');
 
-const query = 'https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/3/query?where=1%3D1&outFields=OBJECTID,RouteDay,SHAPE&outSR=4326&f=json'
+const query = 'https://gis2.arlingtontx.gov/agsext2/rest/services/OpenData/OD_Community/MapServer/4/query?where=1%3D1&outFields=*&outSR=4326&f=json'
 
 const baseurl = 'https://maps.googleapis.com/maps/api/geocode/json?';
 const geocodeurl = 'https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=';
-const apikey = 'AIzaSyAuEdJ504Geu7RLxBhkjWjlKQ0fQFD9Lrs';
+const apikey = 'AIzaSyCu6jN8s1Ztan8tiwigndWsugCuNKsTgL0';
 
 var state = '';
 

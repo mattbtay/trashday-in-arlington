@@ -3,3 +3,4 @@ node_modules
 .git
 build
 docs1
+.vscode/launch.json
